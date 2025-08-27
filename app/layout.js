@@ -19,6 +19,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <script src="http://localhost:3000/api/embed/68aed0f1ac248555cf9eff3f/script" async></script>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
