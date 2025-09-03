@@ -1,28 +1,20 @@
-'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
-export default function Login() {
-  const [email, setEmail] = useState(''); const [password, setPassword] = useState('');
-  const [err, setErr] = useState(''); const router = useRouter();
+import LoginComponent from "@/components/LoginComponent";
+import { getCurrentUser } from '@/lib/auth';
+import { redirect } from 'next/navigation';
 
-  async function submit(e) {
-    e.preventDefault(); setErr('');
-    const res = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
-    const data = await res.json();
-    if (!res.ok) return setErr(data.error || 'Failed');
-    router.push('/dashboard');
-  }
+export default async function Login() {
+  
+ const currentUser = await getCurrentUser();
+ 
+ if (currentUser) {
+  redirect('/dashboard')
+ }
+
 
   return (
-    <main style={{ padding: 24, fontFamily: 'system-ui, sans-serif' }}>
-      <h2>Login</h2>
-      <form onSubmit={submit} style={{ display: 'grid', gap: 12, maxWidth: 360 }}>
-        <input required placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} />
-        <input required placeholder="Password" type="password" value={password} onChange={e=>setPassword(e.target.value)} />
-        <button type="submit">Login</button>
-        {err && <div style={{ color: 'crimson' }}>{err}</div>}
-      </form>
+    <main className="min-h-screen bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 flex items-center justify-center px-4">
+      <LoginComponent />
     </main>
   );
 }

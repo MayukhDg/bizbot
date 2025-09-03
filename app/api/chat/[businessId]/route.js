@@ -7,7 +7,7 @@ import { generateAnswer } from '../../../../lib/llm';
 
 // End-user chat (no auth). Each client sends a stable sessionId (stored in localStorage).
 export async function POST(req, { params }) {
-  const { businessId } = params;
+  const { businessId } = await params;
   const { sessionId, message } = await req.json();
   if (!businessId || !sessionId || !message) return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
 
