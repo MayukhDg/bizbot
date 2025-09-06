@@ -20,7 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <script src="http://localhost:3000/api/embed/68af31a7d6517ed0243bdfd6/script" async></script>
+      <script src="https://bizbot-eight.vercel.app/api/embed/68bc1da4fa020c7b86d4bd28/script" async></script>
       
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
